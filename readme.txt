@@ -1,2 +1,2 @@
-hitenproj1.streamlit.io
+hitenkaproject.streamlit.io
 Thank you for your hardwork
