@@ -2,5 +2,5 @@
 
 import streamlit as st
 
-st.title('Hiten Bhadra first project')
-st.subheader('Subheader')
+st.title('I am working on something else')
+st.subheader('Thank You for checking out my project')
