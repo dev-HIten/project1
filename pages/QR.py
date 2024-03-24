@@ -6,14 +6,8 @@ import io
 
 image=io.BytesIO()
 st.title('QR code generator')
-q=st.text_input('Enter the data to make qr code')
+q=st.text_input('Enter the data to make QR code')
 img = qrcode.make(q)
-type(img)  # qrcode.image.pil.PilImage
 img.save(image)
-st.image(image, caption='Your personalised qr code')
-btn = st.download_button(
-            label="Download image",
-            data=image,
-            file_name="qr.png",
-            mime="image/png"
-          )
+st.image(image, caption='Your personalised QR code')
+btn = st.download_button(label="Download Image",data=image,file_name="qr.png",mime="image/png" )

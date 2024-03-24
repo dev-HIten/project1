@@ -24,7 +24,7 @@ if link:
         with col2:
               preview=st.button(label="Watch Preview")
         with col3:
-                st.download_button(label="Download Thumbnail", data=thumbnail_url, file_name="thumbnail.jpg",mime="image/jpg")
+                st.download_button(label="Download Thumbnail", data=thumbnail_url, file_name="thumbnail.png",mime="image/png")
         if preview:
               st.video(video)
        
