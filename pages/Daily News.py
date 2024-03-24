@@ -7,6 +7,10 @@ def news(url):
     articles = data['articles']
     for article in articles:
         st.header(article["title"])
+        try:
+            st.image(article["urlToImage"])
+        except:
+            pass
         st.write(article["content"])
         st.caption(article["url"])
 
