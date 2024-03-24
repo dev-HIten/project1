@@ -44,13 +44,13 @@ st.subheader(f"Your age is {age_years} years, {age_months} months, and {age_days
 
 #time of survival
 days=(current_date-birth_date).days
- 
-sent=["Congratulation you have wasted",
-      "Congrats you have wasted",
+
+sent=["Congrats you have succesfully wasted",
       "Congrats you have survived for",
       "You've been learning and exploring for"]
 
 st.subheader(f"{random.choice(sent)} {(days)} days")
+st.progress(days/29000)
 
 links = [
   "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
