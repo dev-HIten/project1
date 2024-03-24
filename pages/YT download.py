@@ -1,13 +1,11 @@
 import streamlit as st
-
 from pytube import YouTube
 import io
-from PIL import Image
 
 st.title("Youtube Video downloader")
-st.caption("Longer video takes ,patience is key to success")
+st.caption("Longer video takes time to load,please be patience")
 
-link = st.text_input("Enter the YouTube video URL: ",placeholder="paste here",value="https://www.youtube.com/watch?v=5DEdR5lqnDE")
+link = st.text_input("Enter the YouTube video URL: ",placeholder="paste here",value="https://www.youtube.com/watch?v=tPEE9ZwTmy0&pp=ygUZc21hbGxlc3QgdmlkZW8gb24geW91dHViZQ%3D%3D")
 
 if link:
     buffer = io.BytesIO()
@@ -20,13 +18,16 @@ if link:
         stream = yt.streams.get_highest_resolution()
         stream.stream_to_buffer(buffer)
         col1 , col2 ,col3 = st.columns([1,1,1])
+        video=buffer.getvalue()
         with col1:
-                st.download_button(label='Download Video', data=buffer.getvalue(), file_name='video.mp4', mime='video/mp4')
+                st.download_button(label='Download Video', data=video, file_name='video.mp4', mime='video/mp4')
         with col2:
-              st.link_button(label="Watch this video",url=link)
+              preview=st.button(label="Watch Preview")
         with col3:
                 st.download_button(label="Download Thumbnail", data=thumbnail_url, file_name="thumbnail.jpg",mime="image/jpg")
-
+        if preview:
+              st.video(video)
+       
     except:
         st.warning("Please, Enter correct youtube link")        
     
