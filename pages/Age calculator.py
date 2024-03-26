@@ -1,9 +1,7 @@
 import streamlit as st
-from datetime import date
-import random
+from datetime import date,datetime,time
 
-st.title('Age calculator')
-
+@st.cache_data
 def calculate_age(birth_date, current_date):
     # Calculation
     years = current_date.year - birth_date.year
@@ -20,6 +18,7 @@ def calculate_age(birth_date, current_date):
 
     return years, months, days
 
+@st.cache_data
 def get_days_in_month(month, year):
     # Returns the number of days in a given month and year 
     if month == 2:  # February
@@ -32,11 +31,27 @@ def get_days_in_month(month, year):
     else:
         return 31
 
+def calculate_time_left(event_datetime):
+    now = datetime.now()
+    time_left = event_datetime - now
+    days_left = time_left.days
+    hours_left = time_left.seconds // 3600
+    mins_left =(time_left.seconds % 3600 ) // 60
+    secs_left=(time_left.seconds % 3600 ) % 60
+    return days_left, hours_left ,mins_left,secs_left
+    
+st.title("Age calculator")
+
 # Current date
 current_date = date.today()
 
 # Create date objects for birth date and current date
-birth_date=st.date_input('Enter birth date :baby: :smile:',value=date(2007,3,28),min_value=date(1900,1,1),max_value=current_date)
+col1,col2= st.columns([1,1])
+with col1:
+    birth_date=st.date_input('Enter birth date :baby: :smile:',value=date(2007,3,28),min_value=date(1900,1,1),max_value=current_date)
+with col2:
+    birth_time= st.time_input("Enter the time of the new event",time(0,00))
+
 
 # Calculate age
 age_years, age_months, age_days = calculate_age(birth_date, current_date)
@@ -45,24 +60,35 @@ st.subheader(f"Your age is {age_years} years, {age_months} months, and {age_days
 #time of survival
 days=(current_date-birth_date).days
 
-sent=["Congrats you have succesfully wasted",
-      "Congrats you have survived for",
-      "You've been learning and exploring for"]
+st.subheader(f"You've been learning and exploring for {(days)} days")
+col1,col2= st.columns([1,10])
+with col1:
+    st.write(f'{age_years}/ 100')
+    st.write(f'{age_months}/12')
+    st.write(f'{age_days}/30')
 
-st.subheader(f"{random.choice(sent)} {(days)} days")
-st.progress(days/29000)
+with col2:
+    st.progress(age_years/100)
+    st.progress(age_months/12)
+    st.progress(age_days/30)
 
-links = [
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
-]
+next_birthday = birth_date.replace(year=current_date.year)
 
-video=random.choice(links)
+if next_birthday.day ==29 and next_birthday.month==2:
+    next_birthday.replace(day=28)
 
-if st.button("Get party"):
-    st.video(video)
+elif next_birthday < current_date:
+    next_birthday = next_birthday.replace(year=current_date.year + 1)
+
+
+event_datetime=datetime.combine(next_birthday, birth_time)
+
+if st.button("How much time left for next birth day"):
+    days_left, hours_left, mins_left , secs_left= calculate_time_left(event_datetime)
+    st.subheader(f"{days_left} days {hours_left}:{mins_left}:{secs_left} left for your next birthday")
+
+    
+
 
 
 
