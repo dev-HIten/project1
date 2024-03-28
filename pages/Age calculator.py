@@ -85,7 +85,8 @@ event_datetime=datetime.combine(next_birthday, birth_time)
 
 if st.button("How much time left for next birth day"):
     if age_months==0 and age_days==0:
-        with st.column([1,1,1])[1]:
+        col1,col2,col3=st.column([1,1,1])
+        with col2:
             st.header('Happy Birthday')
     days_left, hours_left, mins_left , secs_left= calculate_time_left(event_datetime)
     st.subheader(f"{days_left} days {hours_left}:{mins_left}:{secs_left} left for your next birthday")
