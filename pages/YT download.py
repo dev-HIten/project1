@@ -5,7 +5,7 @@ import io
 st.title("Youtube Video downloader")
 st.caption("Longer video takes time to load,please be patience")
 
-link = st.text_input("Enter the YouTube video URL: ",placeholder="paste here",value="https://www.youtube.com/watch?v=tPEE9ZwTmy0&pp=ygUZc21hbGxlc3QgdmlkZW8gb24geW91dHViZQ%3D%3D")
+link = st.text_input("Enter the YouTube video URL: ",placeholder="paste here",value="https://www.youtube.com/watch?v=MvsAesQ-4zA")
 
 if link:
     video = io.BytesIO()
